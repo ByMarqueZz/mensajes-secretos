@@ -1,10 +1,8 @@
 <?php
-    class CodigoBinario extends Codificacion{
-        static $diccionario;
+    require_once 'classes/Codificacion.php';
 
-        // Constructor
-        public function __construct() {
-            self::$diccionario = array(
+    class CodigoBinario extends Codificacion{
+        const DICCIONARIO = array(
                 "a" => "00000",
                 "b" => "00001",
                 "c" => "00010",
@@ -34,13 +32,19 @@
                 "z" => "11010",
                 " " => "11011",
             );
+
+        private $caracterCodificado;
+
+        public function __construct($caracterCodificado) {
+            $this->caracterCodificado = $caracterCodificado;
         }
+
         public function getCaracterCodificado($char){
-            return self::$diccionario[$char];
+            return self::DICCIONARIO[$char];
         }
-        // metodo codificar
-        public function codificar($char){
-            $caracter = self::getCaracterCodificado($char);
+
+        public function decodificar(){
+            return array_search($this->caracterCodificado, self::DICCIONARIO);
         }
     }
 ?>

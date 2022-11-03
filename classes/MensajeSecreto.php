@@ -1,25 +1,17 @@
 <?php
+    require_once 'classes/CodigoBinario.php';
+    require_once 'classes/CodigoMorse.php';
+
     class MensajeSecreto{
 
         private $mensaje;
-        private $mensajeCodificado;
 
         public function __construct($nombreFichero){
-            $this->mensajeCodificado = array();
+            $this->mensaje = array();
             $contenido = $this->leerFichero($nombreFichero);
             $this->separarMensaje($contenido, 5);
         }
 
-        // getters y setters
-        public function getMensaje(){
-            return $this->mensaje;
-        }
-
-        public function setMensaje($mensaje){
-            $this->mensaje = $mensaje;
-        }
-
-        // Métodos
         public function leerFichero($nombreFichero){
             $fichero = fopen($nombreFichero, "r");
             $contenido = fread($fichero, filesize($nombreFichero));
@@ -27,15 +19,26 @@
         }
 
         public function separarMensaje($contenido, $longitud){
-            // separa la cadena en subcadenas de la longitud que le pases
-            $this->mensaje = str_split($contenido, $longitud);
+            $mensajeCodificado = str_split($contenido, $longitud);
+            foreach ($mensajeCodificado as $caracterCodificado) {
+                if($this->isCodigoBinario($caracterCodificado)){
+                    array_push($this->mensaje, new CodigoBinario($caracterCodificado));
+                } else {
+                    array_push($this->mensaje, new CodigoMorse($caracterCodificado));
+                }
+            }
         }
 
-        public function codificarBinario(){
-            $codigoBinario = new CodigoBinario();
-            foreach ($this->mensaje as $char) {
-                $this->mensajeCodificado[] = $codigoBinario->codificar($char);
+        public function decodificar(){
+            $mensajeDecodificado = "";
+            foreach ($this->mensaje as $codigo) {
+                $mensajeDecodificado .= $codigo->decodificar();
             }
+            return $mensajeDecodificado;
+        }
+
+        private function isCodigoBinario($caracterCodificado){
+            return $caracterCodificado[0] == "0" || $caracterCodificado[0] == "1";
         }
     }
 

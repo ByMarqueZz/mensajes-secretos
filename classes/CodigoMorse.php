@@ -1,10 +1,8 @@
 <?php
-    class CodigoMorse extends Codificacion{
-        static $diccionario;
+    require_once 'classes/Codificacion.php';
 
-        // Constructor
-        public function __construct() {
-            self::$diccionario = array(
+    class CodigoMorse extends Codificacion{
+        const DICCIONARIO = array(
                 "a" => ".-   ",
                 "b" => "-... ",
                 "c" => "-.-. ",
@@ -33,6 +31,19 @@
                 "z" => "--.. ",
                 " " => "     ",
             );
+
+        private $caracterCodificado;
+
+        public function __construct($caracterCodificado) {
+            $this->caracterCodificado = $caracterCodificado;
+        }
+
+        public function getCaracterCodificado($char){
+            return self::DICCIONARIO[$char];
+        }
+
+        public function decodificar(){
+            return array_search($this->caracterCodificado, self::DICCIONARIO);
         }
     }
 ?>

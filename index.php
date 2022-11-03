@@ -7,12 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <!-- formulario con un input con mensaje secreto -->
     <h1>Codificador de mensajes secretos</h1>
     <?php
         include ('classes/MensajeSecreto.php');
         $mensajeSecreto = new MensajeSecreto("mensaje.txt");
-        print_r($mensajeSecreto->getMensaje());
+
+        echo $mensajeSecreto->decodificar();
     ?>
 </body>
 </html>
