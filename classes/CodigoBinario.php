@@ -35,9 +35,12 @@
                 " " => "11011",
             );
         }
+        public function getCaracterCodificado($char){
+            return self::$diccionario[$char];
+        }
         // metodo codificar
         public function codificar($char){
-            return self::$diccionario[$char];
+            $caracter = self::getCaracterCodificado($char);
         }
     }
 ?>

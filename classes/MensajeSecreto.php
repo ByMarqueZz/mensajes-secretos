@@ -7,7 +7,7 @@
         public function __construct($nombreFichero){
             $this->mensajeCodificado = array();
             $contenido = $this->leerFichero($nombreFichero);
-            $this->separarMensaje($contenido, 1);
+            $this->separarMensaje($contenido, 5);
         }
 
         // getters y setters
