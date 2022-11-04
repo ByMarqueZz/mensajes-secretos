@@ -51,6 +51,8 @@
             $fichero = fopen("return.txt", "w");
             fwrite($fichero, $mensajeCodificado);
             fclose($fichero);
+
+            return "<pre>".$mensajeCodificado."</pre>";
         }
 
         public function decodificar(){
