@@ -1,0 +1,12 @@
+Clase MensajeSecreto:
+	- cambiar el nombre del metodo separarMensaje() por almacenarMensaje().
+	- cambiar el metodo isCodigoBinario() para que determine si el codigo es binario
+	  utilizando expresiones regulares en vez de comprobar si la posicion 0 del string es 0 o 1.
+	- hacer el metodo codificar() para cuando me pasen el mensaje en español o se quiera recodificar
+	  el mensaje que se ha decodificado.
+	  
+	  Dentro de un for desde 0 hasta la longitud del string (mensaje en español) se escoje de manera
+ 	  aleatoria entre las formas de codificar (utilizando array_rand) y se instancia el objeto que toque
+	  utilizando el string que a devuelto el array_rand y como parametro del constructor se le pasa la letra
+	  en español (deberia de haber una sobrecarga de constructores el los que si le paso una letra se utiliza
+	  uno y si le paso un binario o morse, dependiendo de la clase, se utilizará el otro) 

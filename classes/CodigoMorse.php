@@ -45,5 +45,9 @@
         public function decodificar(){
             return array_search($this->caracterCodificado, self::DICCIONARIO);
         }
+
+        public function codificar(){
+            return self::DICCIONARIO[$this->caracterCodificado];
+        }
     }
 ?>
