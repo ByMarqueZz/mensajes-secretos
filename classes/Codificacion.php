@@ -1,8 +1,12 @@
 <?php
     abstract class Codificacion{
-        // abstract public function codificar($char);
+        protected $caracterCodificado;
+
+        protected function __construct($caracterCodificado) {
+            $this->caracterCodificado = $caracterCodificado;
+        }
+
         abstract public function decodificar();
         abstract public function codificar();
-        abstract public function getCaracterCodificado($char);
     }
 ?>

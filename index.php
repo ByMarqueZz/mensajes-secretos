@@ -10,10 +10,10 @@
     <h1>Codificador de mensajes secretos</h1>
     <?php
         include ('classes/MensajeSecreto.php');
-        $mensajeSecretoDecodificado = new MensajeSecreto("mensajeEspañol.txt");
+        // $mensajeSecretoDecodificado = new MensajeSecreto("mensajeEspañol.txt");
         $mensajeSecretoCodificado = new MensajeSecreto("mensajeBinMorse.txt");
 
-        echo $mensajeSecretoDecodificado->codificar();
+        // echo $mensajeSecretoDecodificado->codificar();
         echo $mensajeSecretoCodificado->decodificar();
     ?>
 </body>

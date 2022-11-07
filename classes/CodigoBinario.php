@@ -32,14 +32,9 @@
                 "z" => "11010",
                 " " => "11011",
             );
-
-        private $caracterCodificado;
-
+        
         public function __construct($caracterCodificado) {
-            $this->caracterCodificado = $caracterCodificado;
-        }
-
-        public function getCaracterCodificado($char){
+            parent::__construct($caracterCodificado);
         }
 
         public function decodificar(){

@@ -32,14 +32,8 @@
                 " " => "     ",
             );
 
-        private $caracterCodificado;
-
         public function __construct($caracterCodificado) {
-            $this->caracterCodificado = $caracterCodificado;
-        }
-
-        public function getCaracterCodificado($char){
-            return self::DICCIONARIO[$char];
+            parent::__construct($caracterCodificado);
         }
 
         public function decodificar(){

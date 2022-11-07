@@ -64,7 +64,8 @@
         }
 
         private function isCodigoBinario($caracterCodificado){
-            return $caracterCodificado[0] == "0" || $caracterCodificado[0] == "1";
+            return preg_match("/[0-1]/", $caracterCodificado);
+            // return $caracterCodificado[0] == "0" || $caracterCodificado[0] == "1";
         }
 
         private function isDecodificado($contenido){
