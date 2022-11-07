@@ -9,12 +9,23 @@
 <body>
     <h1>Codificador de mensajes secretos</h1>
     <?php
-        include ('classes/MensajeSecreto.php');
-        // $mensajeSecretoDecodificado = new MensajeSecreto("mensajeEspañol.txt");
-        $mensajeSecretoCodificado = new MensajeSecreto("mensajeBinMorse.txt");
+        include ('clases/MensajeSecreto.php');
+        // Decodificar
+        // capturar la excepcion que se lanza cuando el fichero no existe o no se puede leer
+        try{
+            $mensajeSecretoCodificado = new MensajeSecreto("mensajeBinMorse.txt");
+            echo $mensajeSecretoCodificado->decodificar();
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
 
-        // echo $mensajeSecretoDecodificado->codificar();
-        echo $mensajeSecretoCodificado->decodificar();
+        // Codificar (cuando se codifica, ademas de mostrarse por pantalla, se guarda en un archivo)
+        // try{
+        //     $mensajeSecretoDecodificado = new MensajeSecreto("mensajeEspañol.txt");
+        //     echo $mensajeSecretoDecodificado->codificar();
+        // } catch (Exception $e){
+        //     echo $e->getMessage();
+        // }
     ?>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-    require_once 'classes/Codificacion.php';
+    require_once 'clases/Codificacion.php';
 
     class CodigoBinario extends Codificacion{
         const DICCIONARIO = array(

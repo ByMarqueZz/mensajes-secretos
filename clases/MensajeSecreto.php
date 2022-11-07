@@ -1,6 +1,6 @@
 <?php
-    require_once 'classes/idiomas/CodigoBinario.php';
-    require_once 'classes/idiomas/CodigoMorse.php';
+    require_once 'clases/codigos/CodigoBinario.php';
+    require_once 'clases/codigos/CodigoMorse.php';
 
     class MensajeSecreto{
 
@@ -10,19 +10,23 @@
             $this->mensaje = array();
             $contenido = $this->leerFichero($nombreFichero);
             if($this->isDecodificado($contenido)){
-                $this->separarMensajeDecodificado($contenido, 1);
+                $this->almacenarMensajeDecodificado($contenido, 1);
             } else{
-                $this->separarMensajeCodificado($contenido, 5);
+                $this->almacenarMensajeCodificado($contenido, 5);
             }
         }
 
         public function leerFichero($nombreFichero){
+            if(!file_exists($nombreFichero) || !is_readable($nombreFichero)){
+                throw new Exception("El fichero no existe o no se puede leer");
+            }
+
             $fichero = fopen($nombreFichero, "r");
             $contenido = fread($fichero, filesize($nombreFichero));
             return $contenido;
         }
 
-        public function separarMensajeCodificado($contenido, $longitud){
+        public function almacenarMensajeCodificado($contenido, $longitud){
             $mensajeCodificado = str_split($contenido, $longitud);
             foreach ($mensajeCodificado as $caracterCodificado) {
                 if($this->isCodigoBinario($caracterCodificado)){
@@ -33,12 +37,13 @@
             }
         }
 
-        public function separarMensajeDecodificado($contenido, $longitud){
+        public function almacenarMensajeDecodificado($contenido, $longitud){
             $contenidoMinuscula = strtolower($contenido);
             $mensajeDecodificado = str_split($contenidoMinuscula, $longitud);
-            $formasCodificar = $this->obtenerIdiomas();
+            $formasCodificar = $this->obtenerCodigos();
             foreach ($mensajeDecodificado as $caracterDecodificado) {
-                array_push($this->mensaje, new $formasCodificar[array_rand($formasCodificar, 1)]($caracterDecodificado));
+                $formaCodificar = $formasCodificar[array_rand($formasCodificar)];
+                array_push($this->mensaje, new $formaCodificar($caracterDecodificado));
             }
         }
 
@@ -48,7 +53,7 @@
                 $mensajeCodificado .= $codigo->codificar();
             }
 
-            $fichero = fopen("return.txt", "w");
+            $fichero = fopen("mensajeCodificado.txt", "w");
             fwrite($fichero, $mensajeCodificado);
             fclose($fichero);
 
@@ -65,23 +70,23 @@
 
         private function isCodigoBinario($caracterCodificado){
             return preg_match("/[0-1]/", $caracterCodificado);
-            // return $caracterCodificado[0] == "0" || $caracterCodificado[0] == "1";
         }
 
         private function isDecodificado($contenido){
-            // expresion regular que valida si son caracteres alfabeticos
             return preg_match("/[a-zA-Z]/", $contenido);
         }
 
-        private function obtenerIdiomas(){
-            $arrFiles = scandir("./idiomas");
-            $arrIdiomas = array();
+        private function obtenerCodigos(){
+            $arrFiles = scandir("./clases/codigos");
+            $arrCodigos = array();
             foreach ($arrFiles as $file) {
                 $file = str_replace(".php", "", $file);
-                array_push($arrIdiomas, $file);
+                if($file != "." && $file != ".."){
+                    array_push($arrCodigos, $file);
+                }
             }
 
-            return $arrIdiomas;
+            return $arrCodigos;
         }
     }
 

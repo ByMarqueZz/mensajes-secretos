@@ -1,5 +1,5 @@
 <?php
-    require_once 'classes/Codificacion.php';
+    require_once 'clases/Codificacion.php';
 
     class CodigoMorse extends Codificacion{
         const DICCIONARIO = array(
