@@ -8,8 +8,11 @@
 </head>
 <body>
     <?php
-    // echo preg_match("/[a-zA-Z]/", 'Hola mundo');
-    echo "     espacios     " . "   otro";
+    $arrFiles = scandir("./classes/idiomas");
+    foreach ($arrFiles as $file) {
+        $file = str_replace(".php", "", $file);
+        echo $file;
+    }
     ?>
 </body>
 </html>

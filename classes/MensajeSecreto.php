@@ -1,6 +1,6 @@
 <?php
-    require_once 'classes/CodigoBinario.php';
-    require_once 'classes/CodigoMorse.php';
+    require_once 'classes/idiomas/CodigoBinario.php';
+    require_once 'classes/idiomas/CodigoMorse.php';
 
     class MensajeSecreto{
 
@@ -36,7 +36,7 @@
         public function separarMensajeDecodificado($contenido, $longitud){
             $contenidoMinuscula = strtolower($contenido);
             $mensajeDecodificado = str_split($contenidoMinuscula, $longitud);
-            $formasCodificar = ['CodigoBinario', 'CodigoMorse'];
+            $formasCodificar = $this->obtenerIdiomas();
             foreach ($mensajeDecodificado as $caracterDecodificado) {
                 array_push($this->mensaje, new $formasCodificar[array_rand($formasCodificar, 1)]($caracterDecodificado));
             }
@@ -71,6 +71,17 @@
         private function isDecodificado($contenido){
             // expresion regular que valida si son caracteres alfabeticos
             return preg_match("/[a-zA-Z]/", $contenido);
+        }
+
+        private function obtenerIdiomas(){
+            $arrFiles = scandir("./idiomas");
+            $arrIdiomas = array();
+            foreach ($arrFiles as $file) {
+                $file = str_replace(".php", "", $file);
+                array_push($arrIdiomas, $file);
+            }
+
+            return $arrIdiomas;
         }
     }
 
